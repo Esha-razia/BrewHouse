@@ -95,24 +95,24 @@ export default function OrderQueue() {
       {/* Page Header */}
       <div className="text-center max-w-2xl mx-auto space-y-4">
         <span className="text-accent-600 text-xs font-bold uppercase tracking-widest bg-accent-50 px-3 py-1 rounded-full">
-          Live Kitchen Dashboard
+          Real-Time Tracking
         </span>
         <h1 className="text-3xl sm:text-4xl font-black text-coffee-950 font-display">
-          BrewHouse Order Queue
+          Track Your Order
         </h1>
         <p className="text-coffee-600 text-sm">
-          Track the live status of all active orders in our kitchen, or enter your order ID to trace your specific cup.
+          Enter your order ID below to trace the preparation and delivery progress of your cup in real-time.
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-12 gap-8 items-start">
+      <div className="max-w-2xl mx-auto space-y-6">
         
-        {/* Left Column: Track Specific Order */}
-        <div className="lg:col-span-7 space-y-6">
+        {/* Track Specific Order */}
+        <div className="space-y-6">
           <div className="bg-white rounded-3xl border border-coffee-100 p-6 sm:p-8 shadow-sm space-y-6">
             <h2 className="text-xl font-bold text-coffee-900 flex items-center gap-2">
               <Clock className="w-5 h-5 text-accent-500" />
-              Track My Order (No Login Required)
+              Track My Order
             </h2>
 
             <form onSubmit={handleTrackSubmit} className="flex gap-2">
@@ -242,81 +242,7 @@ export default function OrderQueue() {
             </div>
           )}
         </div>
-
-        {/* Right Column: Live Kitchen Queue List */}
-        <div className="lg:col-span-5 space-y-6">
-          <div className="bg-white rounded-3xl border border-coffee-100 p-6 shadow-sm space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-coffee-950 flex items-center gap-2 font-display">
-                <Coffee className="w-5 h-5 text-accent-600 animate-pulse" />
-                Live Preparation Queue
-              </h2>
-              <button 
-                onClick={fetchQueue}
-                className="p-1.5 text-coffee-400 hover:text-accent-500 rounded-lg hover:bg-coffee-50 transition-colors"
-                title="Refresh Queue"
-              >
-                <RefreshCw className="w-4 h-4" />
-              </button>
-            </div>
-
-            {loadingQueue ? (
-              <div className="py-12 flex justify-center text-coffee-400">
-                <RefreshCw className="w-6 h-6 animate-spin text-accent-500" />
-              </div>
-            ) : pollError ? (
-              <p className="text-xs text-red-500 text-center py-6">{pollError}</p>
-            ) : queue.length === 0 ? (
-              <div className="text-center py-10 space-y-3">
-                <div className="text-3xl">☕✨</div>
-                <p className="text-sm font-semibold text-coffee-800">All caught up!</p>
-                <p className="text-xs text-coffee-400">There are no orders currently being prepared in the kitchen. Order yours now!</p>
-                <Link to="/menu" className="btn-primary !px-5 !py-2 text-xs inline-block">Order Now</Link>
-              </div>
-            ) : (
-              <div className="space-y-3.5">
-                {queue.map((item, idx) => (
-                  <div 
-                    key={item._id}
-                    className="p-4 rounded-2xl border border-coffee-100 bg-coffee-50/30 flex items-start justify-between gap-4 relative overflow-hidden"
-                  >
-                    {/* Position tag */}
-                    <div className="absolute top-0 left-0 bg-coffee-700 text-white text-[9px] font-bold px-2 py-0.5 rounded-br-lg shadow-sm">
-                      #{idx + 1}
-                    </div>
-
-                    <div className="space-y-1.5 pt-1">
-                      <p className="text-xs font-bold text-coffee-900 mt-1">Customer: {item.customerName}</p>
-                      <div className="space-y-1">
-                        {item.items.map((itemDetail, itemIdx) => (
-                          <p key={itemIdx} className="text-[11px] text-coffee-500 leading-normal">
-                            <span className="font-semibold text-coffee-700">{itemDetail.name}</span> ({itemDetail.size}) x{itemDetail.quantity}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="text-right flex flex-col items-end gap-1 pt-1">
-                      <span className={`text-[10px] font-black px-2 py-0.5 rounded-md uppercase tracking-wider ${
-                        item.status === 'Pending' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
-                        item.status === 'Preparing' ? 'bg-blue-100 text-blue-700 border border-blue-200 animate-pulse' :
-                        'bg-purple-100 text-purple-700 border border-purple-200'
-                      }`}>
-                        {item.status}
-                      </span>
-                      <span className="text-[9px] text-coffee-400 font-semibold mt-1">
-                        {new Date(item.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
       </div>
-
     </div>
   );
 }

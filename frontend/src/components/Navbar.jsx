@@ -71,7 +71,7 @@ export default function Navbar() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/menu', label: 'Menu' },
-    { to: '/order-queue', label: 'Order Queue' },
+    { to: '/order-queue', label: 'Track Order' },
   ];
 
   return (

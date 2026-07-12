@@ -58,11 +58,11 @@ export default function ProductCard({ product }) {
       </div>
 
       {/* Image container */}
-      <Link to={`/product/${product._id}`} className="relative h-56 overflow-hidden bg-coffee-50 block flex-shrink-0">
+      <Link to={`/product/${product._id}`} className="relative h-40 sm:h-56 overflow-hidden bg-coffee-50 block flex-shrink-0">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-contain p-3 bg-white transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-coffee-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -74,26 +74,26 @@ export default function ProductCard({ product }) {
 
 
       {/* Product info */}
-      <div className="p-5 flex flex-col flex-grow">
-        <span className="text-[10px] uppercase font-bold tracking-wider text-accent-600 font-body">
+      <div className="p-3 sm:p-5 flex flex-col flex-grow">
+        <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider text-accent-600 font-body">
           {product.category}
         </span>
         <Link to={`/product/${product._id}`}>
-          <h3 className="font-display text-lg font-bold text-coffee-800 mt-1 hover:text-accent-500 transition-colors line-clamp-1">
+          <h3 className="font-display text-sm sm:text-lg font-bold text-coffee-800 mt-1 hover:text-accent-500 transition-colors line-clamp-1">
             {product.name}
           </h3>
         </Link>
-        <p className="text-xs text-coffee-500 mt-1.5 leading-relaxed line-clamp-2 flex-grow">
+        <p className="text-xs text-coffee-500 mt-1.5 leading-relaxed line-clamp-2 flex-grow hidden sm:block">
           {product.description}
         </p>
-
+        
         {/* Size Selection Chips */}
-        <div className="flex items-center gap-1.5 mt-4" onClick={(e) => e.preventDefault()}>
+        <div className="flex items-center gap-1 mt-3" onClick={(e) => e.preventDefault()}>
           {SIZES.map((s) => (
             <button
               key={s.key}
               onClick={() => setSize(s.key)}
-              className={`w-8 h-8 rounded-full text-xs font-bold transition-all border ${
+              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full text-[10px] sm:text-xs font-bold transition-all border ${
                 size === s.key
                   ? 'bg-coffee-700 text-white border-coffee-700 shadow-sm scale-105'
                   : 'bg-coffee-50 text-coffee-600 border-coffee-100 hover:border-coffee-300 hover:bg-white'
@@ -107,10 +107,10 @@ export default function ProductCard({ product }) {
         </div>
 
         {/* Price and Cart Button */}
-        <div className="flex items-center justify-between mt-5 pt-3 border-t border-coffee-100/50">
+        <div className="flex flex-col xs:flex-row xs:items-center justify-between mt-4 pt-3 border-t border-coffee-100/50 gap-2">
           <div className="flex flex-col">
-            <span className="text-[10px] text-coffee-400 font-semibold uppercase">Price</span>
-            <span className="font-display text-xl font-black text-coffee-800">
+            <span className="text-[9px] sm:text-[10px] text-coffee-400 font-semibold uppercase">Price</span>
+            <span className="font-display text-base sm:text-xl font-black text-coffee-800">
               Rs. {product.priceBySize[size]}
             </span>
           </div>
@@ -119,10 +119,10 @@ export default function ProductCard({ product }) {
             whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
             disabled={adding || !product.inStock}
-            className="btn-primary !px-4.5 !py-2 text-xs flex items-center gap-1.5 shadow-sm"
+            className="btn-primary !px-3 sm:!px-4.5 !py-2 text-[10px] sm:text-xs flex items-center justify-center gap-1 shadow-sm w-full xs:w-auto"
           >
-            <ShoppingBag className="w-3.5 h-3.5" />
-            {adding ? 'Adding…' : 'Add to Cart'}
+            <ShoppingBag className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+            <span>{adding ? 'Adding…' : 'Add'}</span>
           </motion.button>
         </div>
       </div>

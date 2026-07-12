@@ -393,7 +393,7 @@ export default function Footer() {
               {[
                 { label: 'Full Menu', to: '/menu' },
                 { label: 'Your Cart', to: '/cart' },
-                { label: 'Order History', to: '/profile' },
+                { label: 'Track Order', to: '/order-queue' },
                 { label: 'Login', to: '/login' },
                 { label: 'Sign Up', to: '/signup' },
               ].map(({ label, to }) => (
