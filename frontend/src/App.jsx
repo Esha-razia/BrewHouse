@@ -19,6 +19,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import NotFound from './pages/NotFound';
 
 import OrderConfirmation from './pages/OrderConfirmation';
+import OrderQueue from './pages/OrderQueue';
 
 export default function App() {
   return (
@@ -41,6 +42,8 @@ export default function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/order-confirmation" element={<OrderConfirmation />} />
+                <Route path="/order-queue" element={<OrderQueue />} />
+
 
                 <Route
                   path="/profile"

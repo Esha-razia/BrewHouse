@@ -59,6 +59,7 @@ export default function ProductDetail() {
   const COLD_ONLY = product?.category === 'Premium Blend Iced Capp' || product?.category === 'Brew Signature Blended' || product?.category === 'Matcha';
   const showTempToggle = product?.category === 'HOT & COLD BEVERAGES' && !HOT_ONLY;
   const isCoffeeBeans = product?.category === 'Coffee Beans';
+  const isTea = product?.category?.toLowerCase() === 'tea';
   const sizeOptions = isCoffeeBeans ? BEAN_SIZES : SIZES;
 
   const handleAddToCart = async () => {
@@ -96,26 +97,52 @@ export default function ProductDetail() {
   const totalPrice = (basePrice + extraPrice) * quantity;
 
   // Visual Cup Preview logic
-  const isIced = product.category.toLowerCase().includes('iced') || product.category.toLowerCase().includes('cold') || product.category.toLowerCase().includes('frappe');
+  const productNameLower = product?.name?.toLowerCase() || '';
+  const productCategoryLower = product?.category?.toLowerCase() || '';
+  const isIced = productCategoryLower.includes('iced') || productCategoryLower.includes('cold') || productCategoryLower.includes('frappe') || productNameLower.includes('iced') || productNameLower.includes('cold') || productNameLower.includes('frappe') || productCategoryLower.includes('matcha');
   
+  // Color map based on ingredients/category
+  let liquidColor = '#24140C'; // Default espresso dark brown (black/no milk)
+  
+  if (productCategoryLower.includes('matcha') || productNameLower.includes('matcha')) {
+    liquidColor = milk ? '#8CB37D' : '#4E7243'; // Creamy matcha latte green vs ceremonial green
+  } else if (productNameLower.includes('mango')) {
+    liquidColor = '#F5A623'; // Tropical mango orange-yellow
+  } else if (productNameLower.includes('strawberry')) {
+    liquidColor = '#E05A65'; // Strawberry pinkish-red
+  } else if (productNameLower.includes('pistachio')) {
+    liquidColor = '#97C197'; // Creamy pistachio light green
+  } else if (productNameLower.includes('biscoff') || productNameLower.includes('lotus')) {
+    liquidColor = '#C19A6B'; // Cookie butter brown
+  } else if (productCategoryLower.includes('tea') || productNameLower.includes('tea')) {
+    if (productNameLower.includes('green')) {
+      liquidColor = '#C5E0B4'; // Translucent green tea
+    } else if (productNameLower.includes('peach') || productNameLower.includes('iced tea')) {
+      liquidColor = '#E59866'; // Translucent amber peach iced tea
+    } else {
+      liquidColor = '#A0522D'; // Translucent reddish-brown tea (Sienna)
+    }
+  } else {
+    // Coffee/espresso beverages
+    if (milk === 'Whole Milk' || milk === 'Skimmed Milk') {
+      liquidColor = '#8A5E3B'; // Creamy latte beige
+    } else if (milk === 'Oat Milk' || milk === 'Almond Milk') {
+      liquidColor = '#B28E68'; // Slightly lighter almond/oat cream
+    } else if (milk === 'Soy Milk') {
+      liquidColor = '#A47D56'; // Smooth warm beige
+    }
+    
+    if (productNameLower.includes('mocha') || productNameLower.includes('chocolate') || productNameLower.includes('cocoa')) {
+      liquidColor = '#3D2516'; // Deep chocolate mocha
+    } else if (productNameLower.includes('americano')) {
+      liquidColor = '#1F0F07'; // Near-black americano
+    } else if (productNameLower.includes('caramel')) {
+      liquidColor = '#A67B5B'; // Warm caramel latte brown
+    }
+  }
+
   // Height map based on size
   const heightPercent = { small: '50%', medium: '72%', large: '94%' }[size];
-  
-  // Color map based on milk
-  let liquidColor = '#24140C'; // Default espresso dark brown (black/no milk)
-  if (milk === 'Whole Milk' || milk === 'Skimmed Milk') {
-    liquidColor = '#8A5E3B'; // Creamy latte beige
-  } else if (milk === 'Oat Milk' || milk === 'Almond Milk') {
-    liquidColor = '#B28E68'; // Slightly lighter almond/oat cream
-  } else if (milk === 'Soy Milk') {
-    liquidColor = '#A47D56'; // Smooth warm beige
-  }
-  
-  if (product.name.toLowerCase().includes('mocha')) {
-    liquidColor = '#3D2516'; // Deep chocolate mocha
-  } else if (product.name.toLowerCase().includes('americano')) {
-    liquidColor = '#1F0F07'; // Near-black americano
-  }
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -170,7 +197,7 @@ export default function ProductDetail() {
                 exit={{ opacity: 0 }}
                 src={product.image}
                 alt={product.name}
-                className="w-full h-full object-cover rounded-2xl shadow-card"
+                className="w-full h-full object-contain p-4 bg-white rounded-2xl shadow-card"
               />
             ) : (
               <motion.div
@@ -284,7 +311,7 @@ export default function ProductDetail() {
                   >
                     <span className="text-sm font-bold">{s.label}</span>
                     <span className={`text-[10px] mt-0.5 font-medium ${size === s.key ? 'text-coffee-200' : 'text-coffee-400'}`}>
-                      {s.volume} · Rs. {product.priceBySize[s.key].toFixed(0)}
+                      {isTea ? `Rs. ${product.priceBySize[s.key].toFixed(0)}` : `${s.volume} · Rs. ${product.priceBySize[s.key].toFixed(0)}`}
                     </span>
                   </button>
                 ))}

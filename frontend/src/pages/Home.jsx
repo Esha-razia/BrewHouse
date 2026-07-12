@@ -69,7 +69,7 @@ export default function Home() {
             className="lg:col-span-8 space-y-6"
           >
             
-            <h1 className="font-display text-4.5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight drop-shadow-md">
+            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight drop-shadow-md">
               Where Coffee Craft <br />
               <span className="bg-gradient-to-r from-accent-400 via-amber-400 to-accent-300 bg-clip-text text-transparent">
                 Meets Daily Comfort
@@ -121,14 +121,14 @@ export default function Home() {
               className="p-6 sm:p-8 bg-coffee-50 border border-coffee-200/50 rounded-3xl shadow-sm flex flex-col sm:flex-row items-center gap-6"
             >
               <div className="w-32 h-32 shrink-0 rounded-2xl overflow-hidden border border-coffee-100 shadow-inner">
-                <img src="/latte.png" alt="BrewHouse Signature Latte Art" className="w-full h-full object-cover scale-105" />
+                <img src="https://i.pinimg.com/736x/8f/8a/56/8f8a564d29d298bfdf3b79e154473736.jpg" alt="BrewHouse Signature Latte Art" className="w-full h-full object-cover scale-105" />
               </div>
               <div className="space-y-2 text-center sm:text-left">
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <h3 className="font-display text-lg sm:text-xl font-bold text-coffee-950">
                     The "BrewHouse Favorite" Signature Latte
                   </h3>
-                  <span className="font-display text-xl font-black text-accent-600 shrink-0">$5.00</span>
+                  <span className="font-display text-xl font-black text-accent-600 shrink-0">Rs. 1,090</span>
                 </div>
                 <div className="flex items-center justify-center sm:justify-start gap-2">
                   <span className="text-[10px] bg-coffee-200 text-coffee-700 font-bold px-2 py-0.5 rounded-md">
@@ -139,7 +139,7 @@ export default function Home() {
                   Our strong latte with any available syrup. Rich espresso combined with textured hot milk. We got you.
                 </p>
                 <div className="pt-2">
-                  <Link to="/menu" className="text-xs font-bold text-accent-600 hover:text-accent-500 flex items-center gap-1 justify-center sm:justify-start">
+                  <Link to="/menu?category=Brew%20Signature%20Blended" className="text-xs font-bold text-accent-600 hover:text-accent-500 flex items-center gap-1 justify-center sm:justify-start">
                     Order Ahead <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>

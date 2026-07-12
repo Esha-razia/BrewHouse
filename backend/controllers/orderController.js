@@ -125,4 +125,39 @@ const updateOrderStatus = asyncHandler(async (req, res) => {
   res.json(updated);
 });
 
-module.exports = { placeOrder, getMyOrders, getOrderById, getAllOrders, updateOrderStatus };
+// @desc    Get public active order queue (Pending, Preparing, Out for Delivery)
+// @route   GET /api/orders/public-queue
+// @access  Public
+const getPublicQueue = asyncHandler(async (req, res) => {
+  const orders = await Order.find({
+    status: { $in: ['Pending', 'Preparing', 'Out for Delivery'] },
+  })
+    .select('items totalPrice status createdAt deliveryAddress.fullName')
+    .sort({ createdAt: 1 }); // FIFO queue (oldest first)
+  
+  // Format orders to obscure sensitive customer names (e.g. "John Doe" -> "John D.")
+  const formattedOrders = orders.map(order => {
+    const fullName = order.deliveryAddress?.fullName || 'Guest';
+    const names = fullName.trim().split(/\s+/);
+    const firstName = names[0] || 'Guest';
+    const lastNameInitial = names.length > 1 ? ` ${names[names.length - 1][0]}.` : '';
+    
+    return {
+      _id: order._id,
+      customerName: `${firstName}${lastNameInitial}`,
+      items: order.items.map(item => ({
+        name: item.name,
+        size: item.size,
+        quantity: item.quantity,
+      })),
+      totalPrice: order.totalPrice,
+      status: order.status,
+      createdAt: order.createdAt,
+    };
+  });
+  
+  res.json(formattedOrders);
+});
+
+module.exports = { placeOrder, getMyOrders, getOrderById, getAllOrders, updateOrderStatus, getPublicQueue };
+

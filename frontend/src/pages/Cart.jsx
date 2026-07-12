@@ -57,34 +57,34 @@ export default function Cart() {
 
       <div className="space-y-4">
         {cart.items.map((item) => (
-          <div key={item._id} className="card flex flex-col sm:flex-row gap-4 p-4">
-            <img src={item.image} alt={item.name} className="w-full sm:w-24 h-24 object-cover rounded-xl" />
+          <div key={item._id} className="card flex gap-4 p-4 items-center">
+            <img src={item.image} alt={item.name} className="w-20 h-20 sm:w-24 sm:h-24 object-contain p-1.5 bg-white rounded-xl flex-shrink-0" />
 
-            <div className="flex-1">
-              <h3 className="font-semibold text-coffee-800">{item.name}</h3>
-              <p className="text-sm text-coffee-500 capitalize">Size: {item.size}</p>
-              <p className="text-sm text-coffee-500">
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-coffee-800 text-sm sm:text-base truncate">{item.name}</h3>
+              <p className="text-xs text-coffee-500 capitalize">Size: {item.size}</p>
+              <p className="text-[11px] text-coffee-500 truncate">
                 {item.customization?.milk}, {item.customization?.sugarLevel}
                 {item.customization?.extraShot ? ', Extra Shot' : ''}
               </p>
-              <p className="text-accent-500 font-semibold mt-1">Rs. {lineTotal(item).toFixed(0)}</p>
+              <p className="text-accent-500 font-semibold text-sm mt-1">Rs. {lineTotal(item).toFixed(0)}</p>
             </div>
 
-            <div className="flex sm:flex-col items-center sm:items-end justify-between gap-3">
-              <div className="flex items-center border border-coffee-200 rounded-full">
+            <div className="flex flex-col items-end justify-center gap-2">
+              <div className="flex items-center border border-coffee-200 rounded-full bg-white">
                 <button
                   onClick={() => handleQuantityChange(item._id, item.quantity - 1)}
                   disabled={busyItemId === item._id}
-                  className="w-8 h-8 text-lg"
+                  className="w-7 h-7 flex items-center justify-center text-sm font-bold"
                   aria-label="Decrease quantity"
                 >
                   −
                 </button>
-                <span className="w-8 text-center text-sm">{item.quantity}</span>
+                <span className="w-6 text-center text-xs">{item.quantity}</span>
                 <button
                   onClick={() => handleQuantityChange(item._id, item.quantity + 1)}
                   disabled={busyItemId === item._id}
-                  className="w-8 h-8 text-lg"
+                  className="w-7 h-7 flex items-center justify-center text-sm font-bold"
                   aria-label="Increase quantity"
                 >
                   +
@@ -93,7 +93,7 @@ export default function Cart() {
               <button
                 onClick={() => handleRemove(item._id)}
                 disabled={busyItemId === item._id}
-                className="text-sm text-red-600 hover:underline"
+                className="text-xs text-red-650 hover:underline font-medium"
               >
                 Remove
               </button>
