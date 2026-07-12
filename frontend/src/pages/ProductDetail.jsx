@@ -410,19 +410,19 @@ export default function ProductDetail() {
             )}
 
             {/* Quantity and Checkout Trigger */}
-            <div className="flex items-center gap-4 pt-4 border-t border-coffee-100/50">
-              <div className="flex items-center border-2 border-coffee-200 rounded-full bg-white px-1 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 pt-4 border-t border-coffee-100/50 w-full">
+              <div className="flex items-center justify-between border-2 border-coffee-200 rounded-full bg-white px-2 py-1 shadow-sm w-full sm:w-auto">
                 <button
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="w-10 h-10 text-lg font-semibold hover:bg-coffee-50 rounded-full transition-colors"
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-lg font-semibold hover:bg-coffee-50 rounded-full transition-colors flex items-center justify-center"
                   aria-label="Decrease quantity"
                 >
                   −
                 </button>
-                <span className="w-8 text-center font-bold text-sm text-coffee-800">{quantity}</span>
+                <span className="w-12 text-center font-bold text-sm text-coffee-800">{quantity}</span>
                 <button
                   onClick={() => setQuantity((q) => q + 1)}
-                  className="w-10 h-10 text-lg font-semibold hover:bg-coffee-50 rounded-full transition-colors"
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-lg font-semibold hover:bg-coffee-50 rounded-full transition-colors flex items-center justify-center"
                   aria-label="Increase quantity"
                 >
                   +
@@ -433,7 +433,7 @@ export default function ProductDetail() {
                 whileTap={{ scale: 0.98 }}
                 onClick={handleAddToCart}
                 disabled={adding || !product.inStock}
-                className="btn-primary flex-grow flex items-center justify-center gap-2 !py-3.5 shadow-md shadow-accent-500/25"
+                className="btn-primary w-full sm:flex-grow flex items-center justify-center gap-2 !py-3 sm:!py-3.5 shadow-md shadow-accent-500/25 text-xs sm:text-sm"
               >
                 <ShoppingBag className="w-4 h-4" />
                 {adding ? 'Adding…' : product.inStock ? `Add to Cart · Rs. ${totalPrice.toFixed(0)}` : 'Sold Out'}
