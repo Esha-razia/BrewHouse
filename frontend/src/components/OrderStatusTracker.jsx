@@ -112,25 +112,25 @@ export default function OrderStatusTracker({ status }) {
       </div>
 
       {/* Standard Progress bar */}
-      <div className="flex items-center w-full px-2">
+      <div className="flex items-center w-full px-0 sm:px-2 overflow-hidden">
         {STEPS.map((step, i) => (
-          <div key={step} className="flex items-center flex-1 last:flex-none">
-            <div className="flex flex-col items-center">
+          <div key={step} className="flex items-center flex-1 last:flex-none min-w-0">
+            <div className="flex flex-col items-center min-w-0">
               <motion.div
                 initial={{ scale: 0.8 }}
                 animate={{ scale: i <= currentIndex ? 1.05 : 1 }}
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all relative ${
+                className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all relative shrink-0 ${
                   i <= currentIndex ? 'bg-accent-500 text-white shadow-sm' : 'bg-coffee-100 text-coffee-400'
                 }`}
               >
                 {i <= currentIndex ? (
-                  <CheckCircle2 className="w-4 h-4" />
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 ) : (
-                  <span>{i + 1}</span>
+                  <span className="text-[10px] sm:text-xs">{i + 1}</span>
                 )}
               </motion.div>
               <span
-                className={`text-[10px] font-bold mt-2 text-center w-16 uppercase tracking-wider ${
+                className={`text-[8px] sm:text-[10px] font-bold mt-1 text-center w-10 sm:w-16 uppercase tracking-tight sm:tracking-wider leading-tight ${
                   i <= currentIndex ? 'text-coffee-800' : 'text-coffee-400'
                 }`}
               >
@@ -138,7 +138,7 @@ export default function OrderStatusTracker({ status }) {
               </span>
             </div>
             {i < STEPS.length - 1 && (
-              <div className="flex-1 h-1 mx-2 mb-6 rounded-full bg-coffee-100 overflow-hidden">
+              <div className="flex-1 h-1 mx-1 sm:mx-2 mb-5 sm:mb-6 rounded-full bg-coffee-100 overflow-hidden">
                 <motion.div
                   initial={{ width: '0%' }}
                   animate={{ width: i < currentIndex ? '100%' : '0%' }}
