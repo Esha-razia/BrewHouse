@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-coffee-50 text-coffee-900 font-body antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-coffee-800;
+  }
+  /* Visible keyboard focus for accessibility */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-accent-500;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent-500 hover:bg-accent-600 text-white font-semibold px-5 py-2.5 rounded-full transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-sm hover:shadow-md;
+  }
+  .btn-secondary {
+    @apply bg-coffee-100 hover:bg-coffee-200 text-coffee-800 font-semibold px-5 py-2.5 rounded-full transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98];
+  }
+  .input-field {
+    @apply w-full px-4 py-2.5 rounded-lg border border-coffee-200 bg-white focus:border-accent-500 focus:ring-1 focus:ring-accent-500 outline-none transition-all shadow-sm;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-card overflow-hidden transition-all duration-300 hover:shadow-lg border border-coffee-100/55;
+  }
+  .glassmorphic {
+    @apply bg-coffee-800/80 backdrop-blur-md border-b border-coffee-700/50;
+  }
+}
+
+/* Custom Animations & Keyframes */
+@keyframes grind-shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+  40% { transform: translate(1px, -1px) rotate(0.5deg); }
+  60% { transform: translate(-1px, -1px) rotate(0.5deg); }
+  80% { transform: translate(1px, 1px) rotate(-0.5deg); }
+}
+
+@keyframes drip-pour {
+  0% { transform: translateY(0) scaleY(1); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(80px) scaleY(2); opacity: 0; }
+}
+
+@keyframes steam-rise {
+  0% { transform: translateY(10px) scale(0.8) rotate(0deg); opacity: 0; filter: blur(2px); }
+  50% { opacity: 0.45; }
+  100% { transform: translateY(-50px) scale(1.4) rotate(15deg); opacity: 0; filter: blur(5px); }
+}
+
+@keyframes road-scroll {
+  0% { background-position-x: 0px; }
+  100% { background-position-x: -20px; }
+}
+
+@keyframes bike-ride {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px) rotate(1deg); }
+}
+
+.animate-grind {
+  animation: grind-shake 0.15s infinite linear;
+}
+
+.animate-drip {
+  animation: drip-pour 1.2s infinite linear;
+}
+
+.animate-steam-1 {
+  animation: steam-rise 2.5s infinite ease-out;
+}
+
+.animate-steam-2 {
+  animation: steam-rise 2.5s infinite ease-out;
+  animation-delay: 0.8s;
+}
+
+.animate-steam-3 {
+  animation: steam-rise 2.5s infinite ease-out;
+  animation-delay: 1.6s;
+}
+
+.animate-bike {
+  animation: bike-ride 0.3s infinite ease-in-out;
+}
+
+/* Custom Scrollbar for BrewHouse Aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: theme('colors.coffee.50');
+}
+::-webkit-scrollbar-thumb {
+  background: theme('colors.coffee.300');
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.coffee.400');
+}
+
