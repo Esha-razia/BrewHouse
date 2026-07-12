@@ -298,20 +298,25 @@ export default function ProductDetail() {
             {/* Size Selector */}
             <div>
               <h3 className="text-xs uppercase font-bold tracking-wider text-coffee-400 mb-3">{isCoffeeBeans ? 'Select Weight' : 'Select Size'}</h3>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {sizeOptions.map((s) => (
                   <button
                     key={s.key}
                     onClick={() => setSize(s.key)}
-                    className={`flex flex-col items-center p-3 rounded-2xl border transition-all ${
+                    className={`flex flex-col items-center justify-center p-2 sm:p-3 rounded-2xl border transition-all ${
                       size === s.key
                         ? 'bg-coffee-700 text-white border-coffee-700 shadow-sm scale-[1.02]'
                         : 'bg-white text-coffee-600 border-coffee-200 hover:border-coffee-300'
                     }`}
                   >
-                    <span className="text-sm font-bold">{s.label}</span>
-                    <span className={`text-[10px] mt-0.5 font-medium ${size === s.key ? 'text-coffee-200' : 'text-coffee-400'}`}>
-                      {isTea ? `Rs. ${product.priceBySize[s.key].toFixed(0)}` : `${s.volume} · Rs. ${product.priceBySize[s.key].toFixed(0)}`}
+                    <span className="text-xs sm:text-sm font-bold truncate">{s.label}</span>
+                    {!isTea && (
+                      <span className={`text-[9px] sm:text-[10px] font-medium leading-none mt-0.5 ${size === s.key ? 'text-coffee-200' : 'text-coffee-400'}`}>
+                        {s.volume}
+                      </span>
+                    )}
+                    <span className={`text-[9px] sm:text-[10px] font-semibold leading-none mt-0.5 ${size === s.key ? 'text-accent-300' : 'text-accent-600'}`}>
+                      Rs. {product.priceBySize[s.key].toFixed(0)}
                     </span>
                   </button>
                 ))}
@@ -327,7 +332,7 @@ export default function ProductDetail() {
                     <button
                       key={option}
                       onClick={() => setMilk(option)}
-                      className={`px-3 py-2 rounded-xl text-xs font-semibold border text-center transition-all ${
+                      className={`px-1 sm:px-3 py-2 rounded-xl text-[10px] sm:text-xs font-semibold border text-center transition-all truncate ${
                         milk === option
                           ? 'bg-coffee-700 text-white border-coffee-700 shadow-sm'
                           : 'bg-white text-coffee-600 border-coffee-200 hover:border-coffee-300'
@@ -349,7 +354,7 @@ export default function ProductDetail() {
                     <button
                       key={level}
                       onClick={() => setSugarLevel(level)}
-                      className={`px-4 py-2 rounded-xl text-xs font-semibold border transition-all ${
+                      className={`px-2.5 sm:px-4 py-2 rounded-xl text-[10px] sm:text-xs font-semibold border transition-all ${
                         sugarLevel === level
                           ? 'bg-coffee-700 text-white border-coffee-700 shadow-sm'
                           : 'bg-white text-coffee-600 border-coffee-200 hover:border-coffee-300'
