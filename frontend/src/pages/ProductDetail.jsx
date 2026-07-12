@@ -145,7 +145,7 @@ export default function ProductDetail() {
   const heightPercent = { small: '50%', medium: '72%', large: '94%' }[size];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10">
       
       {/* Toast Notification */}
       <AnimatePresence>
@@ -165,10 +165,10 @@ export default function ProductDetail() {
         )}
       </AnimatePresence>
 
-      <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
+      <div className="grid md:grid-cols-2 gap-6 md:gap-10 lg:gap-16">
         
         {/* Left Side: Photo View vs Interactive Cup Customizer */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 min-w-0 w-full">
           <div className="flex bg-coffee-100 p-1 rounded-full w-fit mb-2">
             <button
               onClick={() => setViewMode('photo')}
@@ -188,7 +188,7 @@ export default function ProductDetail() {
             </button>
           </div>
 
-          <div className="relative aspect-square bg-coffee-50 border border-coffee-200/50 rounded-3xl overflow-hidden flex items-center justify-center p-6 shadow-sm min-h-[380px]">
+          <div className="relative w-full aspect-square bg-coffee-50 border border-coffee-200/50 rounded-2xl sm:rounded-3xl overflow-hidden flex items-center justify-center p-4 shadow-sm">
             {viewMode === 'photo' ? (
               <motion.img
                 key="photo"
@@ -263,7 +263,7 @@ export default function ProductDetail() {
         </div>
 
         {/* Right Side: Options Customizer */}
-        <div className="flex flex-col">
+        <div className="flex flex-col min-w-0 w-full">
           <div className="flex items-center gap-2">
             <span className="text-xs uppercase font-extrabold tracking-widest text-accent-600 font-body bg-accent-50 px-2.5 py-1 rounded-md">
               {product.category}
@@ -275,7 +275,7 @@ export default function ProductDetail() {
             )}
           </div>
 
-          <h1 className="text-3xl font-extrabold text-coffee-950 font-display mt-3 leading-tight">{product.name}</h1>
+          <h1 className="text-xl sm:text-3xl font-extrabold text-coffee-950 font-display mt-2 sm:mt-3 leading-tight">{product.name}</h1>
           
           <div className="flex items-center gap-1.5 mt-2.5 text-xs font-semibold text-coffee-400">
             <span className="text-amber-500 font-bold flex items-center gap-0.5">
@@ -370,7 +370,7 @@ export default function ProductDetail() {
             {/* Temperature Selector — only for HOT & COLD BEVERAGES (non-Hot Only items) */}
             {showTempToggle && (
               <div>
-                <h3 className="text-xs uppercase font-bold tracking-wider text-coffee-400 mb-3">Temperature</h3>
+                <h3 className="text-xs uppercase font-bold tracking-wider text-coffee-400 mb-3">Coffee Variant</h3>
                 <div className="flex gap-3">
                   {['Hot', 'Cold'].map((temp) => (
                     <button
