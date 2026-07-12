@@ -154,12 +154,12 @@ export default function ProductDetail() {
             initial={{ opacity: 0, y: -50, scale: 0.9 }}
             animate={{ opacity: 1, y: 20, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.9 }}
-            className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-coffee-900 text-white px-6 py-3 rounded-full shadow-lg border border-accent-500/30 flex items-center gap-3 font-semibold text-sm"
+            className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-coffee-900 text-white px-4 sm:px-6 py-3 rounded-2xl sm:rounded-full shadow-lg border border-accent-500/30 flex items-center gap-2.5 sm:gap-3 font-semibold text-xs sm:text-sm w-[90%] sm:w-auto justify-between sm:justify-start"
           >
-            <span className="bg-green-500 text-white p-1 rounded-full"><Check className="w-3.5 h-3.5" /></span>
-            <span>{product.name} ({sizeOptions.find((s) => s.key === size)?.label || size}) added to your cart!</span>
-            <Link to="/cart" className="text-accent-400 hover:text-accent-300 ml-2 border-b border-accent-400/50 flex items-center gap-0.5">
-              Go to Cart <ArrowRight className="w-3 h-3" />
+            <span className="bg-green-500 text-white p-1 rounded-full shrink-0"><Check className="w-3.5 h-3.5" /></span>
+            <span className="truncate flex-1 min-w-0">{product.name} ({sizeOptions.find((s) => s.key === size)?.label || size}) added!</span>
+            <Link to="/cart" className="text-accent-400 hover:text-accent-300 ml-2 border-b border-accent-400/50 flex items-center gap-0.5 shrink-0">
+              Cart <ArrowRight className="w-3 h-3" />
             </Link>
           </motion.div>
         )}
